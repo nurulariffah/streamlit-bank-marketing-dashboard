@@ -190,3 +190,21 @@ st.metric(
 st.subheader("Filtered Customer Records")
 
 st.dataframe(filtered_df.head(20))
+
+st.header("Model Monitoring")
+
+col1, col2 = st.columns(2)
+
+with col1:
+    st.metric(
+        label="Model Accuracy",
+        value="82.58%"
+    )
+
+with col2:
+    missing_values = df.isnull().sum().sum()
+
+    st.metric(
+        label="Missing Values",
+        value=int(missing_values)
+    )
