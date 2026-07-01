@@ -65,22 +65,22 @@ st.subheader("Visualization 1: Deposit Subscription Distribution")
 
 deposit_counts = filtered_df["deposit"].value_counts()
 
-fig1, ax1 = plt.subplots()
+fig1, ax1 = plt.subplots(figsize=(6,4))
 ax1.bar(deposit_counts.index, deposit_counts.values)
 ax1.set_xlabel("Deposit Subscription")
 ax1.set_ylabel("Number of Customers")
 ax1.set_title("Distribution of Deposit Subscription")
-st.pyplot(fig1)
+st.pyplot(fig1, use_container_width=False)
 
 # Visualization 2
 st.subheader("Visualization 2: Customer Age Distribution")
 
-fig2, ax2 = plt.subplots()
+fig2, ax2 = plt.subplots(figsize=(6,4))
 ax2.hist(filtered_df["age"], bins=20, edgecolor="black")
 ax2.set_xlabel("Age")
 ax2.set_ylabel("Frequency")
 ax2.set_title("Distribution of Customer Age")
-st.pyplot(fig2)
+st.pyplot(fig2, use_container_width=False)
 
 # Visualization 3
 st.subheader("Visualization 3: Job Category by Deposit Subscription")
@@ -91,12 +91,12 @@ job_deposit = (
     .unstack(fill_value=0)
 )
 
-fig3, ax3 = plt.subplots(figsize=(10, 6))
+fig3, ax3 = plt.subplots(figsize=(7,5))
 job_deposit.plot(kind="barh", ax=ax3)
 ax3.set_xlabel("Number of Customers")
 ax3.set_ylabel("Job Category")
 ax3.set_title("Job Category by Deposit Subscription")
-st.pyplot(fig3)
+st.pyplot(fig3, use_container_width=False)
 
 # Filtered data table
 st.subheader("Filtered Customer Records")
