@@ -208,3 +208,48 @@ with col2:
         label="Missing Values",
         value=int(missing_values)
     )
+# -------------------------------
+# Data Drift Analysis
+# -------------------------------
+
+st.header("Data Drift Analysis")
+
+st.write(
+    "This section compares the reference dataset used during model development "
+    "with simulated deployment data to identify potential data drift."
+)
+
+# Reference dataset
+reference_mean_age = df["age"].mean()
+
+# Simulated deployment dataset
+current_df = df.copy()
+current_df["age"] = current_df["age"] + 5
+
+current_mean_age = current_df["age"].mean()
+age_difference = current_mean_age - reference_mean_age
+
+col1, col2, col3 = st.columns(3)
+
+with col1:
+    st.metric(
+        "Reference Mean Age",
+        f"{reference_mean_age:.2f}"
+    )
+
+with col2:
+    st.metric(
+        "Current Mean Age",
+        f"{current_mean_age:.2f}"
+    )
+
+with col3:
+    st.metric(
+        "Age Difference",
+        f"{age_difference:.2f}"
+    )
+
+if abs(age_difference) > 2:
+    st.warning("Status: Data Drift Detected")
+else:
+    st.success("Status: No Significant Data Drift")
